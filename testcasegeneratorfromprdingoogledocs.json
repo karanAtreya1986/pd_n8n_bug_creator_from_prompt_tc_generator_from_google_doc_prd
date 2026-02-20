@@ -1,0 +1,230 @@
+{
+  "name": "testcasegeneratorfromprdingoogledocs",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -96,
+        -32
+      ],
+      "id": "f7e9b0f7-52bb-4f4d-879d-bfbca12ec7af",
+      "name": "When chat message received",
+      "webhookId": "594e5f4b-2457-40b2-9eb8-193cfca97f1f"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a QA automation agent.\n\nRules:\n\n1. Call readprd ONCE.\n2. Generate exactly 5 test cases.\n3. For each test case, call writetestcase.\n\nEach writetestcase call must be:\n\n{\n  \"Title_\": \"...\",\n  \"ID_\": \"TC-XXX\",\n  \"Precondition_\": \"...\",\n  \"Steps_\": \"...\",\n  \"Expected\": \"...\"\n}\n\nSteps must contain at least 5 numbered steps.\n\nDo not output text.\nDo not explain.\nOnly tool calls.\nStop after 5 calls.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1ecab47b-409d-4ce2-985d-0d067fbde788",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "e70f994d-adbf-4639-a317-11999b401f79",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "i5Dux8cfnJGEjWQV",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1GsT57ocl4HaUCxNhBGVmwvLYh7R24gjVB_RDteltkF4/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        256,
+        176
+      ],
+      "id": "810e793c-7953-4059-acc9-5a9a3ebff769",
+      "name": "readprd",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "3usAB7VdUoiOSsX4",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1QFkyShvTSHeNQy1OBsdH1wF4wNQEMWTcupPDuo7r-Uk/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QFkyShvTSHeNQy1OBsdH1wF4wNQEMWTcupPDuo7r-Uk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Expected": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Expected', ``, 'string') }}",
+            "Title_": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title_', ``, 'string') }}",
+            "ID_": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('ID_', ``, 'string') }}",
+            "Precondition_": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Precondition_', ``, 'string') }}",
+            "Steps_": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Steps_', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Title_",
+              "displayName": "Title_",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID_",
+              "displayName": "ID_",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Precondition_",
+              "displayName": "Precondition_",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Steps_",
+              "displayName": "Steps_",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Expected",
+              "displayName": "Expected",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        208
+      ],
+      "id": "87ed7396-56a4-4387-a36b-e7e54103efaf",
+      "name": "writetestcase",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MO63eQbznLx0QYSt",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "readprd": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "writetestcase": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "401d8194-b8f3-4d9b-a2b1-df6745046cab",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "77d7f1ce8d4f5ca02d4139e97f228b080ada6dedf579cb10c5b7c9762080180d"
+  },
+  "id": "72RzqGFKAXVKol6u",
+  "tags": []
+}

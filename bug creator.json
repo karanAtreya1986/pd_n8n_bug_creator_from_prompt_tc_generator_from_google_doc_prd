@@ -1,0 +1,136 @@
+{
+  "name": "bug creator",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -400,
+        -192
+      ],
+      "id": "daef908f-2296-4160-a010-0c182378c25e",
+      "name": "When chat message received",
+      "webhookId": "db2087db-db3f-46d7-84d6-7740c4b3cd67",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -192,
+        -192
+      ],
+      "id": "5324f586-81e4-429d-85c0-ba3f368b41d9",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        16
+      ],
+      "id": "1da820db-e0d8-4f61-965b-df33cc8e713c",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "CTpZJwy4XbwE11Ci",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "project": {
+          "__rl": true,
+          "value": "10000",
+          "mode": "list",
+          "cachedResultName": "Karan-QA"
+        },
+        "issueType": {
+          "__rl": true,
+          "value": "10007",
+          "mode": "list",
+          "cachedResultName": "Bug"
+        },
+        "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        16
+      ],
+      "id": "5b14779d-8a4e-41d9-bf1b-d898637f184a",
+      "name": "Create an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "CMtnNGdZzRdZn8Et",
+          "name": "Jira SW Cloud account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "464af760-2228-4d8d-a6c4-79ae654dd654",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f1b07a08cbfbe01444d64bd6b368320b83d6e2eed91458defcf68339aab0273b"
+  },
+  "id": "mB2Th3evgNwBjBKo",
+  "tags": []
+}
