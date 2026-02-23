@@ -13,7 +13,7 @@
       ],
       "id": "f7e9b0f7-52bb-4f4d-879d-bfbca12ec7af",
       "name": "When chat message received",
-      "webhookId": "594e5f4b-2457-40b2-9eb8-193cfca97f1f"
+      "webhookId": "<YOUR_WEBHOOK_ID>"
     },
     {
       "parameters": {
@@ -45,7 +45,7 @@
       "name": "Groq Chat Model",
       "credentials": {
         "groqApi": {
-          "id": "i5Dux8cfnJGEjWQV",
+          "id": "<YOUR_GROQ_CREDENTIAL_ID>",
           "name": "Groq account 2"
         }
       }
@@ -53,7 +53,7 @@
     {
       "parameters": {
         "operation": "get",
-        "documentURL": "https://docs.google.com/document/d/1GsT57ocl4HaUCxNhBGVmwvLYh7R24gjVB_RDteltkF4/edit?usp=sharing"
+        "documentURL": "<YOUR_GOOGLE_DOCS_URL>"
       },
       "type": "n8n-nodes-base.googleDocsTool",
       "typeVersion": 2,
@@ -65,7 +65,7 @@
       "name": "readprd",
       "credentials": {
         "googleDocsOAuth2Api": {
-          "id": "3usAB7VdUoiOSsX4",
+          "id": "<YOUR_GOOGLE_DOCS_CREDENTIAL_ID>",
           "name": "Google Docs account"
         }
       }
@@ -75,7 +75,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1QFkyShvTSHeNQy1OBsdH1wF4wNQEMWTcupPDuo7r-Uk/edit?usp=sharing",
+          "value": "<YOUR_GOOGLE_SHEETS_URL>",
           "mode": "url"
         },
         "sheetName": {
@@ -83,7 +83,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QFkyShvTSHeNQy1OBsdH1wF4wNQEMWTcupPDuo7r-Uk/edit#gid=0"
+          "cachedResultUrl": "<YOUR_GOOGLE_SHEETS_URL>"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -161,7 +161,7 @@
       "name": "writetestcase",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "MO63eQbznLx0QYSt",
+          "id": "<YOUR_GOOGLE_SHEETS_CREDENTIAL_ID>",
           "name": "Google Sheets account"
         }
       }

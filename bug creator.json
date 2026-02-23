@@ -13,7 +13,7 @@
       ],
       "id": "daef908f-2296-4160-a010-0c182378c25e",
       "name": "When chat message received",
-      "webhookId": "db2087db-db3f-46d7-84d6-7740c4b3cd67",
+      "webhookId": "<YOUR_WEBHOOK_ID>",
       "alwaysOutputData": false
     },
     {
@@ -44,7 +44,7 @@
       "name": "Groq Chat Model",
       "credentials": {
         "groqApi": {
-          "id": "CTpZJwy4XbwE11Ci",
+          "id": "<YOUR_GROQ_CREDENTIAL_ID>",
           "name": "Groq account"
         }
       }
@@ -53,13 +53,13 @@
       "parameters": {
         "project": {
           "__rl": true,
-          "value": "10000",
+          "value": "<YOUR_JIRA_PROJECT_ID>",
           "mode": "list",
           "cachedResultName": "Karan-QA"
         },
         "issueType": {
           "__rl": true,
-          "value": "10007",
+          "value": "<YOUR_JIRA_ISSUE_TYPE_ID>",
           "mode": "list",
           "cachedResultName": "Bug"
         },
@@ -78,7 +78,7 @@
       "name": "Create an issue in Jira Software",
       "credentials": {
         "jiraSoftwareCloudApi": {
-          "id": "CMtnNGdZzRdZn8Et",
+          "id": "<YOUR_JIRA_CREDENTIAL_ID>",
           "name": "Jira SW Cloud account 2"
         }
       }
